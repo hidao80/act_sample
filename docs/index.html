@@ -1,70 +1,70 @@
 <!doctype html>
-<html lang="ja">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>📝 pushせずに検証する「act」ハンズオン | act_sample</title>
+    <title>📝 Verify Without Pushing: An "act" Hands-on | act_sample</title>
     <meta
       name="description"
-      content="GitHub ActionsのワークフローをローカルPCのDockerコンテナーで検証できる「act」の使い方を、bun + Hono + React + bun:sqliteの最小TODOアプリを題材にひととおり体験するハンズオン記事・スライド・サンプルリポジトリです。"
+      content="A hands-on article, slides, and sample repository walking through how to use `act` to run GitHub Actions workflows in a local Docker container, using a minimal bun + Hono + React + bun:sqlite TODO app as the subject."
     />
     <meta name="author" content="hidao" />
 
-    <!-- OGP (Facebook / 一般) -->
+    <!-- OGP (Facebook / general) -->
     <meta property="og:type" content="article" />
     <meta
       property="og:title"
-      content="pushせずに検証する「act」ハンズオン — GitHub ActionsをローカルPCで動かす"
+      content="Verify Without Pushing: An &quot;act&quot; Hands-on — Running GitHub Actions on Your Local PC"
     />
     <meta
       property="og:description"
-      content="bun + Hono + React + bun:sqliteの最小TODOアプリを題材に、GitHub Actionsをローカルで検証できる「act」のセットアップから実行、つまずきポイントまでをひととおり体験します。"
+      content="Using a minimal bun + Hono + React + bun:sqlite TODO app as the subject, walk through setting up and running `act` to verify GitHub Actions locally, including common pitfalls."
     />
     <meta property="og:site_name" content="act_sample" />
-    <meta property="og:locale" content="ja_JP" />
-    <!-- 実際に公開する際は、デプロイ先の絶対URLに置き換えてください -->
+    <meta property="og:locale" content="en_US" />
+    <!-- Replace with the absolute URL of the actual deployment when publishing -->
     <meta property="og:url" content="https://example.com/act-sample/" />
     <meta
       property="og:image"
-      content="https://cdn.jsdelivr.net/gh/twitter/twemoji@v14.0.2/assets/72x72/1f4dd.png"
+      content="social-preview_en.png"
     />
 
     <!-- OGP (X.com / Twitter) -->
     <meta name="twitter:card" content="summary" />
     <meta
       name="twitter:title"
-      content="pushせずに検証する「act」ハンズオン"
+      content="Verify Without Pushing: An &quot;act&quot; Hands-on"
     />
     <meta
       name="twitter:description"
-      content="GitHub Actionsをpushせずローカルで検証できる「act」を、実際に動くTODOアプリのCI設定で体験するハンズオン。"
+      content="A hands-on walkthrough of `act`, which lets you verify GitHub Actions locally without pushing, using the CI config of a working TODO app."
     />
     <meta
       name="twitter:image"
-      content="https://cdn.jsdelivr.net/gh/twitter/twemoji@v14.0.2/assets/72x72/1f4dd.png"
+      content="social-preview_en.png"
     />
 
-    <!-- Favicon: Twemoji CDN(📝 memo, U+1F4DD)を直接参照。ダウンロード・同梱はしない -->
+    <!-- Favicon: references the Twemoji CDN directly (📝 memo, U+1F4DD). Not downloaded or bundled. -->
     <link
       rel="icon"
       type="image/svg+xml"
       href="https://cdn.jsdelivr.net/gh/twitter/twemoji@v14.0.2/assets/svg/1f4dd.svg"
     />
 
-    <!-- JSON-LD構造化データ -->
+    <!-- JSON-LD structured data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "TechArticle",
-        "headline": "pushせずに検証する「act」ハンズオン — GitHub ActionsをローカルPCで動かす",
-        "description": "bun + Hono + React + bun:sqliteの最小TODOアプリを題材に、GitHub Actionsをローカルで検証できる「act」のセットアップから実行、つまずきポイントまでをひととおり体験するハンズオン記事。",
-        "inLanguage": "ja",
+        "headline": "Verify Without Pushing: An \"act\" Hands-on — Running GitHub Actions on Your Local PC",
+        "description": "Using a minimal bun + Hono + React + bun:sqlite TODO app as the subject, a hands-on article walking through setting up and running `act` to verify GitHub Actions locally, including common pitfalls.",
+        "inLanguage": "en",
         "author": {
           "@type": "Person",
           "name": "hidao"
         },
         "datePublished": "2026-09-05",
-        "image": "https://cdn.jsdelivr.net/gh/twitter/twemoji@v14.0.2/assets/72x72/1f4dd.png",
+        "image": "social-preview_en.png",
         "about": ["act", "GitHub Actions", "Docker", "CI/CD", "Bun"]
       }
     </script>
@@ -140,28 +140,28 @@
       <section class="hero">
         <img
           class="hero-image"
-          src="social-preview.png"
-          alt="act_sample — pushせずに検証する「act」ハンズオン"
+          src="social-preview_en.png"
+          alt="act_sample — Verify Without Pushing: An 'act' Hands-on"
         />
-        <h1>pushせずに検証する「act」ハンズオン</h1>
-        <p>GitHub ActionsをローカルPCで動かす — 北海道もくもく会（2026-09-05）</p>
+        <h1>Verify Without Pushing: An "act" Hands-on</h1>
+        <p>Running GitHub Actions on your local PC — Hokkaido Mokumoku-kai (2026-09-05)</p>
         <div class="cta">
-          <a href="docs/act-handson.md" role="button">記事を読む</a>
+          <a href="docs/act-handson.md" role="button">Read the article</a>
           <a href="docs/slides.md" role="button" class="secondary">
-            スライドを見る
+            View the slides
           </a>
         </div>
       </section>
 
       <section>
-        <h2>これは何？</h2>
+        <h2>What is this?</h2>
         <p>
           <a href="https://github.com/nektos/act"><code>act</code></a>
-          を使うと、GitHub Actionsのワークフローを
-          <strong>pushせずローカルのDockerコンテナーで検証</strong>
-          できます。本リポジトリは、bun + Hono + React + bun:sqlite
-          で組んだ最小構成のTODOアプリを題材に、actのセットアップから実行、
-          つまずきやすいポイントまでをひととおり体験できるハンズオン一式です。
+          lets you
+          <strong>verify GitHub Actions workflows in a local Docker container without pushing</strong>.
+          This repository is a complete hands-on kit built around a minimal TODO app
+          made with bun + Hono + React + bun:sqlite, walking through everything from
+          setting up `act` to running it, including common pitfalls along the way.
         </p>
         <div class="badges">
           <span>Bun</span>
@@ -176,41 +176,42 @@
       </section>
 
       <section>
-        <h2>きっかけ</h2>
+        <h2>Motivation</h2>
         <p>
-          CIを組んだ直後、ワークフローのYAMLを少し書き換えるたびに
-          pushしてGitHub Actionsの実行結果を待つ必要がある不便さに何度も遭遇しました。「架空のサンプルではなく、自分たちが実際に運用しているワークフローを
-          そのまま検証できる」ハンズオンを、もくもく会の参加者にもなぞってもらえるように
-          記事とスライドの両方を用意しました。
+          Right after setting up CI, I kept running into the friction of having to push
+          and wait for GitHub Actions to finish every time I tweaked a workflow YAML file
+          even slightly. I wanted a hands-on that participants at the Mokumoku-kai could
+          follow along with too — not a made-up sample, but a workflow we actually run in
+          production — so I put together both an article and a slide deck.
         </p>
       </section>
 
       <section>
-        <h2>ハンズオンの流れ</h2>
+        <h2>Hands-on Flow</h2>
         <div class="steps-grid">
           <article>
             <header>Step 1</header>
-            題材プロジェクトを確認する
+            Review the sample project
           </article>
           <article>
             <header>Step 2</header>
-            actをインストールする
+            Install act
           </article>
           <article>
             <header>Step 3</header>
-            <code>.actrc</code> でrunnerイメージをマッピングする
+            Map the runner image with <code>.actrc</code>
           </article>
           <article>
             <header>Step 4</header>
-            ワークフローを確認する
+            Review the workflow
           </article>
           <article>
             <header>Step 5</header>
-            ジョブ一覧を表示する（Docker起動不要）
+            List the jobs (no Docker required)
           </article>
           <article>
             <header>Step 6</header>
-            ワークフローを実行する
+            Run the workflow
           </article>
         </div>
       </section>
@@ -219,15 +220,15 @@
     <footer class="container">
       <p>
         <small>
-          本記事の執筆には生成AIを利用しています。by
+          This article was written with the help of generative AI. by
           <strong>hidao</strong>
         </small>
       </p>
       <p>
         <small>
-          ファビコン・OGP画像:
+          Favicon / OGP image:
           <a href="https://twemoji.twitter.com/">Twemoji</a>
-          （📝 memo, U+1F4DD）— CDN参照（jsDelivr）、同梱なし
+          (📝 memo, U+1F4DD) — referenced via CDN (jsDelivr), not bundled
         </small>
       </p>
     </footer>
