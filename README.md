@@ -1,69 +1,69 @@
 # act_sample TODO App
 
-bun + Hono + React + bun:sqlite + Bootstrap 5 によるローカルPC向けの最小構成TODOアプリです。
+A minimal local TODO app built with bun + Hono + React + bun:sqlite + Bootstrap 5.
 
-## セットアップ
+## Setup
 
 ```bash
 bun install
 ```
 
-`/api/*` はHTTP Basic認証で保護されています。リポジトリルートに `.env` を作成し、`"username:password"` をBase64化した値を `ACCESS_TOKEN` として設定してください。
+`/api/*` is protected by HTTP Basic authentication. Create a `.env` file at the repository root and set `ACCESS_TOKEN` to the Base64-encoded value of `"username:password"`.
 
 ```bash
-# 例: username=sample, password=sample の場合
+# Example: username=sample, password=sample
 echo "ACCESS_TOKEN=$(printf 'sample:sample' | base64)" > .env
 ```
 
-## 起動
+## Run
 
 ```bash
 bun run dev
 ```
 
-http://localhost:3000 を開くとTODOアプリが表示されます。
+Open http://localhost:3000 to see the TODO app.
 
-- `GET /api/todos` : 一覧取得
-- `POST /api/todos` : 追加 (`{ "title": "..." }`)
-- `PATCH /api/todos/:id` : 完了/未完了トグル
-- `DELETE /api/todos/:id` : 削除
+- `GET /api/todos`: list todos
+- `POST /api/todos`: add a todo (`{ "title": "..." }`)
+- `PATCH /api/todos/:id`: toggle done/not done
+- `DELETE /api/todos/:id`: delete a todo
 
-API仕様の詳細は [z-ai/openapi.yml](z-ai/openapi.yml) を参照してください。
+See [z-ai/openapi.yml](z-ai/openapi.yml) for the full API spec.
 
-データは `data/todo.sqlite` に保存されます。
+Data is stored in `data/todo.sqlite`.
 
-## テスト
+## Testing
 
 ```bash
-bun test         # bun:test によるユニット・機能・結合テスト
+bun test         # unit, functional, and integration tests via bun:test
 ```
 
-- `src/server/db.test.ts` : リポジトリ層のユニットテスト(インメモリDB)
-- `src/server/app.test.ts` : APIエンドポイントの機能・結合テスト
-- `src/client/App.test.tsx` : Reactコンポーネントのユニット・機能テスト(happy-dom)
+- `src/server/db.test.ts`: unit tests for the repository layer (in-memory DB)
+- `src/server/app.test.ts`: functional/integration tests for the API endpoints
+- `src/client/App.test.tsx`: unit/functional tests for the React component (happy-dom)
 
 ## Lint / Audit
 
 ```bash
 bun run lint     # biome check
-bun audit        # 依存パッケージの脆弱性監査
+bun audit        # audit dependencies for vulnerabilities
 ```
 
 ## CI / act
 
-`.github/workflows/ci.yml` で以下をチェックします。
+`.github/workflows/ci.yml` checks the following:
 
-- `bun test`による自動テスト実行(型チェック含む、`ACCESS_TOKEN`はCI用ダミー値を使用)
-- Biomeによるlint/フォーマットチェック
-- Biome `noExcessiveCognitiveComplexity`ルールによる認知的複雑度チェック
-- `bun audit`による依存パッケージ監査
+- Automated tests via `bun test` (including type checking; `ACCESS_TOKEN` uses a dummy value for CI)
+- Lint/format checks via Biome
+- Cognitive complexity check via Biome's `noExcessiveCognitiveComplexity` rule
+- Dependency audit via `bun audit`
 
-`.actrc` により、`act` でのローカルCI実行時のrunnerイメージを `catthehacker/ubuntu:full-*` (通常のUbuntuに近いフルイメージ) にマッピングしています。
+`.actrc` maps the runner image used for local CI runs with `act` to `catthehacker/ubuntu:act-latest` / `full-latest` (images closer to a full Ubuntu environment).
 
 ```bash
 act push
 ```
 
-## サプライチェーン対策
+## Supply Chain Protection
 
-`.npmrc` の `minimum-release-age=10080` により、公開から7日(10080分)未満のパッケージバージョンのインストールを拒否します。
+`.npmrc`'s `minimum-release-age=10080` rejects installing package versions published less than 7 days (10080 minutes) ago.
