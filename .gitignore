@@ -1,0 +1,8 @@
+node_modules/
+public/main.js
+public/main.js.map
+*.sqlite
+*.sqlite-journal
+.DS_Store
+.env
+.secrets
