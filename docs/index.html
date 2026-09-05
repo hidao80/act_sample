@@ -119,6 +119,11 @@
         font-weight: bold;
         margin: 0;
       }
+      #lang-select {
+        width: auto;
+        margin: 0;
+        padding: 0.35rem 2rem 0.35rem 0.75rem;
+      }
       .steps-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -134,6 +139,13 @@
   <body>
     <header class="container">
       <p class="site-title">📝 act_sample</p>
+      <select id="lang-select" aria-label="Language / 言語 / 语言 / Idioma / Язык">
+        <option value="ja">🇯🇵 日本語</option>
+        <option value="en">🇺🇸 English</option>
+        <option value="zh">🇨🇳 中文</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="ru">🇷🇺 Русский</option>
+      </select>
     </header>
 
     <main class="container">
@@ -141,27 +153,28 @@
         <img
           class="hero-image"
           src="social-preview_en.png"
+          id="hero-img"
           alt="act_sample — Verify Without Pushing: An 'act' Hands-on"
         />
-        <h1>Verify Without Pushing: An "act" Hands-on</h1>
-        <p>Running GitHub Actions on your local PC — Hokkaido Mokumoku-kai (2026-09-05)</p>
+        <h1 id="hero-h1">Verify Without Pushing: An "act" Hands-on</h1>
+        <p id="hero-subtitle">Running GitHub Actions on your local PC — Hokkaido Mokumoku-kai (2026-09-05)</p>
         <div class="cta">
-          <a href="docs/act-handson.md" role="button">Read the article</a>
-          <a href="docs/slides.md" role="button" class="secondary">
+          <a href="docs/act-handson.md" role="button" id="cta-read">Read the article</a>
+          <a href="docs/slides.md" role="button" class="secondary" id="cta-slides">
             View the slides
           </a>
         </div>
       </section>
 
       <section>
-        <h2>What is this?</h2>
-        <p>
+        <h2 id="what-h2">What is this?</h2>
+        <p id="what-body">
           <a href="https://github.com/nektos/act"><code>act</code></a>
           lets you
           <strong>verify GitHub Actions workflows in a local Docker container without pushing</strong>.
           This repository is a complete hands-on kit built around a minimal TODO app
           made with bun + Hono + React + bun:sqlite, walking through everything from
-          setting up `act` to running it, including common pitfalls along the way.
+          setting up <code>act</code> to running it, including common pitfalls along the way.
         </p>
         <div class="badges">
           <span>Bun</span>
@@ -176,8 +189,8 @@
       </section>
 
       <section>
-        <h2>Motivation</h2>
-        <p>
+        <h2 id="motivation-h2">Motivation</h2>
+        <p id="motivation-body">
           Right after setting up CI, I kept running into the friction of having to push
           and wait for GitHub Actions to finish every time I tweaked a workflow YAML file
           even slightly. I wanted a hands-on that participants at the Mokumoku-kai could
@@ -187,31 +200,31 @@
       </section>
 
       <section>
-        <h2>Hands-on Flow</h2>
+        <h2 id="flow-h2">Hands-on Flow</h2>
         <div class="steps-grid">
           <article>
             <header>Step 1</header>
-            Review the sample project
+            <span id="step1">Review the sample project</span>
           </article>
           <article>
             <header>Step 2</header>
-            Install act
+            <span id="step2">Install act</span>
           </article>
           <article>
             <header>Step 3</header>
-            Map the runner image with <code>.actrc</code>
+            <span id="step3">Map the runner image with <code>.actrc</code></span>
           </article>
           <article>
             <header>Step 4</header>
-            Review the workflow
+            <span id="step4">Review the workflow</span>
           </article>
           <article>
             <header>Step 5</header>
-            List the jobs (no Docker required)
+            <span id="step5">List the jobs (no Docker required)</span>
           </article>
           <article>
             <header>Step 6</header>
-            Run the workflow
+            <span id="step6">Run the workflow</span>
           </article>
         </div>
       </section>
@@ -219,18 +232,177 @@
 
     <footer class="container">
       <p>
-        <small>
+        <small id="footer-ai">
           This article was written with the help of generative AI. by
           <strong>hidao</strong>
         </small>
       </p>
       <p>
-        <small>
+        <small id="footer-favicon">
           Favicon / OGP image:
           <a href="https://twemoji.twitter.com/">Twemoji</a>
           (📝 memo, U+1F4DD) — referenced via CDN (jsDelivr), not bundled
         </small>
       </p>
     </footer>
+
+    <script>
+      const TRANSLATIONS = {
+        ja: {
+          title: '📝 pushせずに検証する「act」ハンズオン | act_sample',
+          heroAlt: "act_sample — pushせずに検証する「act」ハンズオン",
+          heroH1: 'pushせずに検証する「act」ハンズオン',
+          heroSubtitle: 'GitHub ActionsをローカルPCで動かす — 北海道もくもく会（2026-09-05）',
+          ctaRead: '記事を読む',
+          ctaSlides: 'スライドを見る',
+          whatH2: 'これは何？',
+          whatBody: '<a href="https://github.com/nektos/act"><code>act</code></a> を使うと、GitHub Actionsのワークフローを<strong>pushせずローカルのDockerコンテナーで検証</strong>できます。本リポジトリは、bun + Hono + React + bun:sqlite で組んだ最小構成のTODOアプリを題材に、actのセットアップから実行、つまずきやすいポイントまでをひととおり体験できるハンズオン一式です。',
+          motivationH2: 'きっかけ',
+          motivationBody: 'CIを組んだ直後、ワークフローのYAMLを少し書き換えるたびにpushしてGitHub Actionsの実行結果を待つ必要がある不便さに何度も遭遇しました。「架空のサンプルではなく、自分たちが実際に運用しているワークフローをそのまま検証できる」ハンズオンを、もくもく会の参加者にもなぞってもらえるように記事とスライドの両方を用意しました。',
+          flowH2: 'ハンズオンの流れ',
+          step1: '題材プロジェクトを確認する',
+          step2: 'actをインストールする',
+          step3: '<code>.actrc</code> でrunnerイメージをマッピングする',
+          step4: 'ワークフローを確認する',
+          step5: 'ジョブ一覧を表示する（Docker起動不要）',
+          step6: 'ワークフローを実行する',
+          footerAi: '本記事の執筆には生成AIを利用しています。by <strong>hidao</strong>',
+          footerFavicon: 'ファビコン・OGP画像: <a href="https://twemoji.twitter.com/">Twemoji</a>（📝 memo, U+1F4DD）— CDN参照（jsDelivr）、同梱なし',
+        },
+        en: {
+          title: '📝 Verify Without Pushing: An "act" Hands-on | act_sample',
+          heroAlt: "act_sample — Verify Without Pushing: An 'act' Hands-on",
+          heroH1: 'Verify Without Pushing: An "act" Hands-on',
+          heroSubtitle: 'Running GitHub Actions on your local PC — Hokkaido Mokumoku-kai (2026-09-05)',
+          ctaRead: 'Read the article',
+          ctaSlides: 'View the slides',
+          whatH2: 'What is this?',
+          whatBody: '<a href="https://github.com/nektos/act"><code>act</code></a> lets you <strong>verify GitHub Actions workflows in a local Docker container without pushing</strong>. This repository is a complete hands-on kit built around a minimal TODO app made with bun + Hono + React + bun:sqlite, walking through everything from setting up <code>act</code> to running it, including common pitfalls along the way.',
+          motivationH2: 'Motivation',
+          motivationBody: 'Right after setting up CI, I kept running into the friction of having to push and wait for GitHub Actions to finish every time I tweaked a workflow YAML file even slightly. I wanted a hands-on that participants at the Mokumoku-kai could follow along with too — not a made-up sample, but a workflow we actually run in production — so I put together both an article and a slide deck.',
+          flowH2: 'Hands-on Flow',
+          step1: 'Review the sample project',
+          step2: 'Install act',
+          step3: 'Map the runner image with <code>.actrc</code>',
+          step4: 'Review the workflow',
+          step5: 'List the jobs (no Docker required)',
+          step6: 'Run the workflow',
+          footerAi: 'This article was written with the help of generative AI. by <strong>hidao</strong>',
+          footerFavicon: 'Favicon / OGP image: <a href="https://twemoji.twitter.com/">Twemoji</a> (📝 memo, U+1F4DD) — referenced via CDN (jsDelivr), not bundled',
+        },
+        zh: {
+          title: '📝 无需推送即可验证的「act」实战教程 | act_sample',
+          heroAlt: 'act_sample — 无需推送即可验证的「act」实战教程',
+          heroH1: '无需推送即可验证的「act」实战教程',
+          heroSubtitle: '在本地电脑上运行 GitHub Actions — 北海道 Mokumoku 会（2026-09-05）',
+          ctaRead: '阅读文章',
+          ctaSlides: '查看幻灯片',
+          whatH2: '这是什么？',
+          whatBody: '<a href="https://github.com/nektos/act"><code>act</code></a> 可以让你<strong>在本地 Docker 容器中验证 GitHub Actions 工作流，而无需推送代码</strong>。本仓库以一个使用 bun + Hono + React + bun:sqlite 构建的最小 TODO 应用为示例，完整演示了从安装 act 到运行、以及常见问题排查的全过程。',
+          motivationH2: '起因',
+          motivationBody: '刚搭建好 CI 之后，我发现每次稍微修改工作流 YAML 文件，都必须推送代码并等待 GitHub Actions 运行结果，非常不便。我希望做一份教程，让 Mokumoku 会的参与者也能跟着实践——不是虚构的示例，而是我们实际在生产环境中使用的工作流——于是准备了这篇文章和配套幻灯片。',
+          flowH2: '实战流程',
+          step1: '查看示例项目',
+          step2: '安装 act',
+          step3: '使用 <code>.actrc</code> 映射 runner 镜像',
+          step4: '查看工作流',
+          step5: '列出任务（无需启动 Docker）',
+          step6: '运行工作流',
+          footerAi: '本文由生成式 AI 协助撰写。作者：<strong>hidao</strong>',
+          footerFavicon: 'favicon / OGP 图片：<a href="https://twemoji.twitter.com/">Twemoji</a>（📝 memo, U+1F4DD）— 通过 CDN（jsDelivr）引用，未内置',
+        },
+        es: {
+          title: '📝 Verifica sin hacer push: un taller de «act» | act_sample',
+          heroAlt: 'act_sample — Verifica sin hacer push: un taller de «act»',
+          heroH1: 'Verifica sin hacer push: un taller de «act»',
+          heroSubtitle: 'Ejecuta GitHub Actions en tu PC local — Hokkaido Mokumoku-kai (2026-09-05)',
+          ctaRead: 'Leer el artículo',
+          ctaSlides: 'Ver las diapositivas',
+          whatH2: '¿Qué es esto?',
+          whatBody: '<a href="https://github.com/nektos/act"><code>act</code></a> te permite <strong>verificar flujos de trabajo de GitHub Actions en un contenedor Docker local sin hacer push</strong>. Este repositorio es un taller completo construido alrededor de una app TODO mínima hecha con bun + Hono + React + bun:sqlite, que recorre todo el proceso desde instalar act hasta ejecutarlo, incluyendo los problemas más comunes.',
+          motivationH2: 'Motivación',
+          motivationBody: 'Justo después de configurar la CI, me encontré una y otra vez con la molestia de tener que hacer push y esperar a que GitHub Actions terminara cada vez que modificaba un poco el YAML del flujo de trabajo. Quería un taller que los participantes del Mokumoku-kai pudieran seguir también — no un ejemplo inventado, sino un flujo de trabajo que realmente usamos en producción — así que preparé tanto un artículo como una presentación.',
+          flowH2: 'Flujo del taller',
+          step1: 'Revisar el proyecto de ejemplo',
+          step2: 'Instalar act',
+          step3: 'Mapear la imagen del runner con <code>.actrc</code>',
+          step4: 'Revisar el flujo de trabajo',
+          step5: 'Listar los jobs (sin necesidad de Docker)',
+          step6: 'Ejecutar el flujo de trabajo',
+          footerAi: 'Este artículo fue escrito con ayuda de IA generativa. por <strong>hidao</strong>',
+          footerFavicon: 'Favicon / imagen OGP: <a href="https://twemoji.twitter.com/">Twemoji</a> (📝 memo, U+1F4DD) — referenciado vía CDN (jsDelivr), no incluido',
+        },
+        ru: {
+          title: '📝 Проверка без push: практикум по «act» | act_sample',
+          heroAlt: 'act_sample — Проверка без push: практикум по «act»',
+          heroH1: 'Проверка без push: практикум по «act»',
+          heroSubtitle: 'Запуск GitHub Actions на локальном ПК — Hokkaido Mokumoku-kai (2026-09-05)',
+          ctaRead: 'Читать статью',
+          ctaSlides: 'Смотреть слайды',
+          whatH2: 'Что это?',
+          whatBody: '<a href="https://github.com/nektos/act"><code>act</code></a> позволяет <strong>проверять workflow GitHub Actions в локальном Docker-контейнере без push</strong>. Этот репозиторий — полноценный практикум на основе минимального TODO-приложения на bun + Hono + React + bun:sqlite, который проведёт вас от установки act до его запуска, включая типичные проблемы.',
+          motivationH2: 'Предыстория',
+          motivationBody: 'Сразу после настройки CI я постоянно сталкивался с неудобством: приходилось делать push и ждать завершения GitHub Actions каждый раз, когда я хоть немного менял YAML workflow. Мне хотелось сделать практикум, который участники Mokumoku-kai тоже могли бы повторить — не выдуманный пример, а workflow, который мы реально используем в продакшене, — поэтому я подготовил и статью, и слайды.',
+          flowH2: 'Ход практикума',
+          step1: 'Изучить пример проекта',
+          step2: 'Установить act',
+          step3: 'Сопоставить образ runner-а через <code>.actrc</code>',
+          step4: 'Просмотреть workflow',
+          step5: 'Вывести список задач (без запуска Docker)',
+          step6: 'Запустить workflow',
+          footerAi: 'Эта статья написана с помощью генеративного ИИ. Автор: <strong>hidao</strong>',
+          footerFavicon: 'Favicon / OGP-изображение: <a href="https://twemoji.twitter.com/">Twemoji</a> (📝 memo, U+1F4DD) — подключено через CDN (jsDelivr), не встроено',
+        },
+      };
+
+      const STORAGE_KEY = 'act-sample-lang';
+      const SUPPORTED_LANGS = Object.keys(TRANSLATIONS);
+
+      function applyLang(lang) {
+        const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+        document.documentElement.lang = lang;
+        document.title = t.title;
+        document.getElementById('hero-img').alt = t.heroAlt;
+        document.getElementById('hero-h1').textContent = t.heroH1;
+        document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
+        document.getElementById('cta-read').textContent = t.ctaRead;
+        document.getElementById('cta-slides').textContent = t.ctaSlides;
+        document.getElementById('what-h2').textContent = t.whatH2;
+        document.getElementById('what-body').innerHTML = t.whatBody;
+        document.getElementById('motivation-h2').textContent = t.motivationH2;
+        document.getElementById('motivation-body').textContent = t.motivationBody;
+        document.getElementById('flow-h2').textContent = t.flowH2;
+        document.getElementById('step1').innerHTML = t.step1;
+        document.getElementById('step2').innerHTML = t.step2;
+        document.getElementById('step3').innerHTML = t.step3;
+        document.getElementById('step4').innerHTML = t.step4;
+        document.getElementById('step5').innerHTML = t.step5;
+        document.getElementById('step6').innerHTML = t.step6;
+        document.getElementById('footer-ai').innerHTML = t.footerAi;
+        document.getElementById('footer-favicon').innerHTML = t.footerFavicon;
+        try {
+          localStorage.setItem(STORAGE_KEY, lang);
+        } catch (e) {
+          /* localStorage unavailable (e.g. private mode) */
+        }
+      }
+
+      function initialLang() {
+        try {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (stored && SUPPORTED_LANGS.includes(stored)) return stored;
+        } catch (e) {
+          /* localStorage unavailable */
+        }
+        const browserLang = (navigator.language || 'en').slice(0, 2);
+        return SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'en';
+      }
+
+      const select = document.getElementById('lang-select');
+      const lang = initialLang();
+      select.value = lang;
+      applyLang(lang);
+      select.addEventListener('change', (e) => applyLang(e.target.value));
+    </script>
   </body>
 </html>
